@@ -12,19 +12,19 @@ namespace JobTrackerApi.Models
         public Guid UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public User User { get; set; } = null;
 
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = null;
 
-        public string Website { get; set; }
+        public string? Website { get; set; }
 
-        public string Industry { get; set; }
+        public string? Industry { get; set; }
 
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public ICollection<Application> Applications { get; set; }
+        public ICollection<Application>? Applications { get; set; }
     }
 }
