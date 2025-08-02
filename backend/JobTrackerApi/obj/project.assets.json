@@ -3565,7 +3565,7 @@
       "Microsoft.AspNetCore.OpenApi >= 9.0.7",
       "Microsoft.EntityFrameworkCore >= 9.0.7",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.7",
-      "Pomelo.EntityFrameworkCore.MySql >= 9.0.0-rc.1",
+      "Pomelo.EntityFrameworkCore.MySql >= 9.0.0-rc.1.efcore.9.0.0",
       "Swashbuckle.AspNetCore >= 9.0.3"
     ]
   },
@@ -3632,7 +3632,7 @@
           },
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
-            "version": "[9.0.0-rc.1, )"
+            "version": "[9.0.0-rc.1.efcore.9.0.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
@@ -3661,17 +3661,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "JobTrackerApi depends on Pomelo.EntityFrameworkCore.MySql (>= 9.0.0-rc.1) but Pomelo.EntityFrameworkCore.MySql 9.0.0-rc.1 was not found. Pomelo.EntityFrameworkCore.MySql 9.0.0-rc.1.efcore.9.0.0 was resolved instead.",
-      "libraryId": "Pomelo.EntityFrameworkCore.MySql",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  }
 }
