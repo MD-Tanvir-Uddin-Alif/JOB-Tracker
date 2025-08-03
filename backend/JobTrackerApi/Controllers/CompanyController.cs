@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]  // ensure endpoints require authentication
+[Authorize]
 public class CompanyController : ControllerBase
 {
     private readonly AppDbContext _context;
@@ -114,6 +114,36 @@ public class CompanyController : ControllerBase
 
         return NoContent();
     }
+    
 
-    // You can also add Update (PUT/PATCH) similarly with ownership check
+
+    [HttpPut("{id}")]
+public async Task<IActionResult> UpdateCompany(Guid id, [FromBody] CompanyUpdateDto dto)
+{
+    var userId = GetUserId();
+
+    var company = await _context.Companies.FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
+
+    if (company == null)
+        return NotFound();
+
+    company.Name = dto.Name;
+    company.Website = dto.Website;
+    company.Industry = dto.Industry;
+    company.Location = dto.Location;
+
+    await _context.SaveChangesAsync();
+
+    return Ok(new CompanyDto
+    {
+        Id = company.Id,
+        Name = company.Name,
+        Website = company.Website,
+        Industry = company.Industry,
+        Location = company.Location,
+        CreatedAt = company.CreatedAt
+    });
+}
+
+
 }

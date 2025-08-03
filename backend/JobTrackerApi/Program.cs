@@ -88,9 +88,6 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-// Add Authentication if you use JWT later
-// builder.Services.AddAuthentication(/* your JWT options here */);
-
 // Optional: Add CORS policy
 builder.Services.AddCors(options =>
 {
