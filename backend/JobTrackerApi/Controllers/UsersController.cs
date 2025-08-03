@@ -7,6 +7,7 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization; 
 
 [ApiController]
 [Route("api/[controller]")]
@@ -64,6 +65,32 @@ public class UsersController : ControllerBase
 
         var token = GenerateJwtToken(user);
         return Ok(new { token });
+    }
+
+    [Authorize] // 👈 JWT required
+    [HttpGet("me")]
+    public async Task<IActionResult> GetCurrentUser()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (userId == null)
+            return Unauthorized(new { message = "User ID not found in token." });
+
+        var userGuid = Guid.Parse(userId);
+        var user = await _context.Users.FindAsync(userGuid);
+
+        if (user == null)
+            return NotFound(new { message = "User not found." });
+
+        var userDto = new UserDto
+        {
+            Id = user.Id,
+            Name = user.Name,
+            Email = user.Email,
+            CreatedAt = user.CreatedAt
+        };
+
+        return Ok(userDto);
     }
 
     private string GenerateJwtToken(User user)
