@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Read JWT settings from appsettings.json
+//WT settings from appsettings.json
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var jwtKey = jwtSettings["Key"];
 
@@ -50,11 +50,9 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-
-// Add services
+//for services
 builder.Services.AddOpenApi();
 
-// MODIFY THIS LINE - Add JSON configuration to handle circular references
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -69,7 +67,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "Job Tracker API", Version = "v1" });
 
-    // Add JWT Bearer support
+    // JWT Bearer support
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
         Name = "Authorization",
